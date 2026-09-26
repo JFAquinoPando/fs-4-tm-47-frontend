@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-cinzel: 'Cinzel', serif;
+  --font-decorative: 'Cinzel Decorative', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --color-scout-950: #08140f;
+  --color-scout-900: #0f231b;
+  --color-scout-800: #163629;
+  --color-scout-700: #1f4a38;
+  --color-scout-accent: #2e6e54;
+
+  --color-parchment-100: #fbf8f2;
+  --color-parchment-200: #ede4d1;
+  --color-parchment-300: #dac9ab;
+  --color-parchment-500: #aa9570;
+
+  --color-titan-crimson: #991b1b;
+  --color-titan-ember: #ea580c;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #0c0a09;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(22, 54, 41, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(153, 27, 27, 0.15) 0%, transparent 50%),
+    linear-gradient(to bottom, #0c0a09, #141210);
+  background-attachment: fixed;
+  color: #e7e5e4;
+  min-height: 100vh;
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
+
+.font-decorative {
+  font-family: var(--font-decorative);
+}
+
+/* Efecto de borde militar / dossier */
+.aot-card-border {
+  position: relative;
+}
+
+.aot-card-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(202, 160, 89, 0.4), rgba(46, 110, 84, 0.2), rgba(68, 64, 60, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
