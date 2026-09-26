@@ -1,6 +1,12 @@
 import { useEffect, useState, useMemo } from 'react'
 import { Tarjeta } from './componentes/Tarjeta'
 
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, '')
+const FETCH_HEADERS = {
+  'ngrok-skip-browser-warning': 'true',
+  'Accept': 'application/json'
+}
+
 function App() {
   const [listado, setListado] = useState([])
   const [cargando, setCargando] = useState(true)
@@ -11,7 +17,7 @@ function App() {
   const ejecutarPeticion = () => {
     setCargando(true)
     setError(null)
-    fetch("http://localhost:3000/api/personajes")
+    fetch(`${API_URL}/api/personajes`, { headers: FETCH_HEADERS })
       .then((peticion) => {
         if (!peticion.ok) {
           throw new Error(`Error en la solicitud: ${peticion.status}`)
@@ -24,7 +30,7 @@ function App() {
       })
       .catch((err) => {
         console.error("Error al cargar los personajes:", err)
-        setError("No se pudo conectar con el Cuartel General (backend en localhost:3000). Asegúrate de que el servidor esté activo.")
+        setError(`No se pudo conectar con el Cuartel General (${API_URL}). Asegúrate de que el servidor esté activo.`)
         setCargando(false)
       })
   }
@@ -32,7 +38,7 @@ function App() {
   useEffect(() => {
     let ignorar = false
 
-    fetch("http://localhost:3000/api/personajes")
+    fetch(`${API_URL}/api/personajes`, { headers: FETCH_HEADERS })
       .then((peticion) => {
         if (!peticion.ok) {
           throw new Error(`Error en la solicitud: ${peticion.status}`)
@@ -48,7 +54,7 @@ function App() {
       .catch((err) => {
         if (!ignorar) {
           console.error("Error al cargar los personajes:", err)
-          setError("No se pudo conectar con el Cuartel General (backend en localhost:3000). Asegúrate de que el servidor esté activo.")
+          setError(`No se pudo conectar con el Cuartel General (${API_URL}). Asegúrate de que el servidor esté activo.`)
           setCargando(false)
         }
       })
